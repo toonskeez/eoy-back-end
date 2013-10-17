@@ -1,0 +1,50 @@
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/edit.css'); ?>
+
+<?php
+//$uri = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+$m_id = $_GET['m_id'];
+$url = 'editmember?m_id=' . $m_id;
+$c_id = $_GET['c_id'];
+
+Zend_Session::start();
+$company = new Zend_Session_Namespace('company');
+
+if(!isset($company->c_id)) {
+	$company->c_id = $c_id;
+} else {
+	if(isset($c_id) && $c_id != $company->c_id) {
+		$company->c_id = $c_id;
+	}
+}
+$company->referrer = $url; // used to redirect back to member edit page from the editcompany.phtml page
+
+$company_profile = $this->company_tbl->getCompany($company->c_id);
+$this->title = "Edit Company: " . '"' . $company_profile['current_company_name'] . '"';
+$this->headTitle($this->title);
+
+?>
+
+<body class="span12">
+<div>
+
+
+<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<!-- ----------------------------------------------------------------- -->
+<div class="row">	
+	<div class="span12">
+		<br>
+		<ul id="menu">
+			<li><a href="editcompanyinfo?c_id=<?php echo $company->c_id ?>">Company Info</a></li>
+			<li><a href="editcompanyoffice?c_id=<?php echo $company->c_id ?>&office_type=head">Head office address</a></li>
+    		<li><a href="editcompanyoffice?c_id=<?php echo $company->c_id ?>&office_type=second">Second office address</a></li>
+    		<li><a href="editcompanyoffice?c_id=<?php echo $company->c_id ?>&office_type=third">Third office address</a></li>
+    		<li><a href="editmember?m_id=<?php echo $m_id ?>"><i>Done</i></a><?= $this->form->cancel ?></li>
+		</ul>
+	</div>
+</div>
+<!-- ----------------------------------------------------------------- -->
+</div>
+</body>

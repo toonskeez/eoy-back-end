@@ -1,0 +1,49 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/edit.css');
+$this->title = "Add new Member Profile";
+$this->headTitle($this->title);
+
+// just testing storage of session variable
+Zend_Session::start();
+//$addMember = new Zend_Session_Namespace('addMember');
+$addMemberForms = new Zend_Session_Namespace('addMemberForms');
+//var_dump($addMember->first_name);
+?>
+
+<body class="span12">
+<div>
+
+<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<!-- ----------------------------------------------------------------- -->
+<div class="row">	
+	<div class="span12">
+		<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+   			method="<?php echo $this->escape($this->form->getMethod()) ?>"
+			enctype="multipart/form-data">
+			<br>
+			<ul id="menu">
+				<li><a href="addmemberpersonal">Personal details</a></li>
+				<li><a href="addmemberprofessional">Professional details</a></li>
+    			<li><a href="addmembernomcompany">Nomination Company</a></li>
+    			<li><a href="addmembercontact">Contact details</a></li>
+    			<li><a href="addmemberaltcontact">Alternative Contact</a></li>
+    			<li><a href="addmembersocmedia">Social Media</a></li>
+			</ul>
+			<span class="submit"><?= $this->form->submit ?></span><?= $this->form->cancel ?>
+		</form>
+	</div>
+</div>
+<!-- ----------------------------------------------------------------- -->
+
+</div>
+
+</body>
+<?php
+	if(isset($this->msg) && $this->msg != '')
+	{
+		echo $this->msg;
+	}
+?>

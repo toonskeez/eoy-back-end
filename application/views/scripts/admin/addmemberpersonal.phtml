@@ -1,0 +1,53 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/form-buttons.css');
+$this->title = "Add personal details";
+$this->headTitle($this->title);
+$this->member_service->populateFormAddMemPersonal($this->form);
+?>
+
+<body class="span12">
+<div>
+
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+	<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<div class="row">
+	
+<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+   	method="<?php echo $this->escape($this->form->getMethod()) ?>"
+	enctype="multipart/form-data">
+</div>
+
+<div class="row"><!-- Start of first row -->	
+	<div class="span4">
+		<fieldset>
+			<legend></legend>
+			<?= $this->form->salutation ?>
+    		<?= $this->form->first_name ?>
+			<?= $this->form->middle_initial ?>
+			<?= $this->form->last_name ?>			
+		</fieldset>
+	</div>
+	<div class="span4">
+		<fieldset>
+			<legend></legend>
+			<?= $this->form->member_bio ?>
+			<?= $this->form->member_other_info ?>
+		</fieldset>
+	</div>
+	<div class="span4">
+		<fieldset>
+			<legend></legend>
+			<?= $this->form->photo_uri ?>
+			<?= $this->form->deceased ?>
+		</fieldset>
+	</div>
+</div><!-- End of first row -->
+<div class="row"><!-- start of second row -->
+	<span class="submit"><?= $this->form->submit ?></span><?= $this->form->cancel ?>
+</div><!-- end of second row -->
+</form>
+
+</div>
+</body>

@@ -1,0 +1,47 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/form-buttons.css');
+$c_id = $_GET['c_id']; // get company id
+$office_type = $_GET['office_type'];
+$this->company_service->populateFormOffice($this->form, $c_id, $office_type);
+$company = $this->company_tbl->getCompany($c_id);
+$this->title = "Edit office address for company: " . '"' . $company['current_company_name'] . '"';
+$this->headTitle($this->title);
+?>
+
+<body class="span12">
+<div>
+
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+	<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<div class="row">
+	
+<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+   	method="<?php echo $this->escape($this->form->getMethod()) ?>"
+	enctype="multipart/form-data">
+</div>
+
+<div class="row"><!-- Start of first row -->
+	<div class="span6">
+		<fieldset>
+    		<legend></legend>
+			<?= $this->form->address_1 ?>
+			<?= $this->form->address_2 ?>
+			<?= $this->form->address_3 ?>
+			<?= $this->form->postcode ?>
+			<?= $this->form->county_sel ?>
+			<?= $this->form->country_sel ?>
+			<?= $this->form->contact_number ?>
+		</fieldset>
+	</div>
+</div><!-- End of first row -->
+
+<div class="row">
+	<span class="submit"><?= $this->form->submit ?></span><?= $this->form->cancel ?>
+</div>
+
+</form>
+
+</div>
+</body>

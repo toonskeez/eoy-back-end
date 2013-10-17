@@ -1,0 +1,74 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/form-buttons.css');
+$this->title = "Member search results";
+$this->headTitle($this->title);
+?>
+
+<body class="span12">
+
+<div class="table-hover"> <!-- Start of div for displaying member profiles -->
+	<p>
+		<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+		<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+		<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+	</p>
+	<p>
+		<a href="/public/member/search">&nbsp;<b>Member search</b></a>
+	<span class="result">
+	<?php
+		if(isset($this->members)) { 
+			$num_results = sizeof($this->members);
+			echo ($num_results == 1) ? $num_results . ' match found' : $num_results . ' matches found';
+		}	
+	?>
+	</span>
+	</p>
+	<?php if(isset($this->members)) { ?>
+	<?php foreach($this->members as $member) : ?>
+		<div class="row">
+			<hr style="border-width: 5px">
+    		<div class="span3">
+				<img src="<?php echo '/public/' . $member['photo_uri']; ?>">
+				<p>
+					<a id="<?php echo $member['id'] ?>" href="/public/admin/editmember?m_id=<?php echo $member['id'] ?>">&nbsp;<b>Edit this Member Profile</b></a>
+				</p>
+			</div>
+   			<div class="span9">	
+   				<P>
+					<?php
+						echo '<b>First Name: </b>' . $member['first_name'] . '<br>';
+						echo '<b>Last Name: </b>' . $member['last_name'] . '<br>';
+						echo '<b>Business phone: </b>' . $member['business_phone'] . '<br>';
+						echo '<b>Email: </b>' . $member['email'] . '<br>';
+						
+						$office_direct_line = $member['office_direct_line'];
+						if($office_direct_line != NULL && $office_direct_line != '') {
+							echo '<b>Office Direct Line: </b>' . $office_direct_line . '<br>';
+						}
+						
+						$home_landline = $member['home_landline'];
+						if($home_landline != NULL && $home_landline != '') {
+							echo '<b>Home Landline: </b>' . $home_landline . '<br>';
+						}
+						
+						$mobile_phone = $member['mobile_phone'];
+						if($mobile_phone != NULL && $mobile_phone != '') {
+							echo '<b>Mobile Phone: </b>' . $mobile_phone . '<br>';
+						}
+						
+						echo '<b>First Year EOY Finalist: </b>' . $member['first_year_eoy_finalist'] . '<br>';
+						echo '<b>Nomination Company Name: </b>' . $member['nomination_company_name'] . '<br>';
+						echo '<br>';
+						echo '<b>Current Company Name: </b>' . $member['current_company_name'] . '<br>';						
+						echo '<b>Company Website: </b>' . $member['company_website'] . '<br>';
+						echo '<b>Company Sector: </b>' . $member['sector'] . '<br>';
+						
+					?>
+				</P>
+			</div>
+		</div>
+	<?php endforeach; ?>
+	<?php } else { echo 'Sorry, no member matches found'; } ?>
+</div> <!-- End of div for displaying member profiles -->
+
+</body>

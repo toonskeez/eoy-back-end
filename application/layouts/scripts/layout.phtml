@@ -1,0 +1,34 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('End of Year Alumni');
+
+
+echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<?php echo $this->headMeta(); ?>
+		<?php echo $this->headTitle(); ?>
+		<?php $this->headScript()->prependFile($this->baseUrl().'/js/jquery-1.5.min.js') ?>
+		<?php $this->headScript()->prependFile($this->baseUrl().'/js/eventHandlers.js') ?>
+		<?php echo $this->headScript(); ?>
+		<?php $this->headLink()->prependStylesheet($this->baseUrl().'/bootstrap/css/bootstrap.min.css'); ?>
+		<?php $this->headLink()->prependStylesheet($this->baseUrl().'/bootstrap/css/bootstrap-responsive.min.css'); ?>
+		<?php echo $this->headLink(); ?>
+		<script type="text/javascript">
+		<!--
+		//call setup pages to add event handlers to page elements
+		setupPages();
+		-->
+		</script>
+	</head>
+	<!-- <body <?php echo $this->bodyScript ?>> -->
+	<div id="logged-in-as-">
+		<br>
+		<h5><?php echo $this->loggedInAs(); ?></h5>
+	</div>
+	<div id="content">
+		<h1><?php echo $this->escape($this->title); ?></h1>
+		<?php echo $this->layout()->content; ?>
+	</div>
+</html>

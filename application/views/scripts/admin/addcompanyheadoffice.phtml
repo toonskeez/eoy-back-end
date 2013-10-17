@@ -1,0 +1,45 @@
+<?php
+$c_id = $_GET['id']; // get company id
+$company = $this->company_tbl->getCompany($c_id);
+$this->title = "Add head office details";
+$this->headTitle($this->title);
+?>
+
+<body class="span12">
+<div>
+
+<div class="row">
+	
+<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+   	method="<?php echo $this->escape($this->form->getMethod()) ?>"
+	enctype="multipart/form-data">
+</div>
+
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+	<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<div class="row"><!-- Start of first row -->
+	<div class="span6">
+		<fieldset>
+    		<legend></legend>
+			<?= $this->form->address_1 ?>
+			<?= $this->form->address_2 ?>
+			<?= $this->form->address_3 ?>
+			<?= $this->form->postcode ?>
+			<?= $this->form->county_state ?>
+			<?= $this->form->country_sel ?>
+			<?= $this->form->contact_number ?>
+		</fieldset>
+	</div>
+</div><!-- End of first row -->
+
+<div class="row">
+	<?= $this->form->submit ?>
+</form>
+</div>
+
+</form>
+
+</div>
+</body>

@@ -1,0 +1,53 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/form-buttons.css');
+$m_id = $_GET['m_id']; // get member id
+$member = $this->member_tbl->getMemberProfile($m_id);
+$this->title = "Edit " . $member['first_name'] . " " . $member['last_name'] . "'s" . " contact details";
+$this->headTitle($this->title);
+$this->member_service->populateFormMemContactInfo($this->form, $m_id);
+?>
+
+<body class="span12">
+<div>
+
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+	<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<div class="row">
+
+<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+   	method="<?php echo $this->escape($this->form->getMethod()) ?>"
+	enctype="multipart/form-data">
+</div>
+
+<div class="row"><!-- Start of first row -->	
+	<div class="span4">
+		<fieldset>
+			<legend></legend>
+			<?= $this->form->direct_phone ?>
+			<?= $this->form->business_phone ?>
+			<?= $this->form->office_direct_line ?>
+			<br>
+		</fieldset>
+	</div>
+	<div class="span4">
+		<fieldset>
+			<legend></legend>
+			<?= $this->form->home_landline ?>
+			<?= $this->form->mobile_phone ?>
+			<?= $this->form->email ?>
+			<?= $this->form->email_other ?>
+			<br>
+		</fieldset>
+	</div>
+</div><!-- End of first row -->
+
+<div class="row"><!-- start of second row -->
+	<span class="submit"><?= $this->form->submit ?></span><?= $this->form->cancel ?>
+</div><!-- end of second row -->
+
+</form>
+
+</div>
+</body>

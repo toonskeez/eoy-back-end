@@ -1,0 +1,63 @@
+<?php
+$this->title = "Members";
+$this->headTitle($this->title);
+?>	
+<!-- <body onload="initialize()"> -->
+<body class="span12">
+
+<div class="table-hover"> <!-- Start of div for displaying member profiles -->
+	<p>
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+	</p>
+	<p>
+	<a href="/public/admin/addmember">&nbsp;<b>Add Member Profile</b></a>&nbsp;
+	<a href="/public/member/search">&nbsp;<b>Member search</b></a>
+	</p>
+	<?php foreach($this->member_profiles as $member_profile) : ?>
+		<div class="row">
+			<hr style="border-width: 5px">
+    		<div class="span3">
+				<img src="<?php echo '/public/' . $this->escape($member_profile->photo_uri); ?>" style="width:100%; max-width:220px;" />
+				<p>
+					<a id="<?php echo $member_profile->id ?>" href="editmember?m_id=<?php echo $member_profile->id ?>">&nbsp;<b>Edit this Member Profile</b></a>
+				</p>
+			</div>
+   			<div class="span9">	
+   				<P>
+					<?php
+						echo '<b>First Name: </b>' . $this->escape($member_profile->first_name) . '<br>';
+						echo '<b>Last Name: </b>' . $this->escape($member_profile->last_name) . '<br>';
+						echo '<b>Business phone: </b>' . $this->escape($member_profile->business_phone) . '<br>';
+						echo '<b>Email: </b>' . $this->escape($member_profile->email) . '<br>';
+						
+						$office_direct_line = $this->escape($member_profile->office_direct_line);
+						if($office_direct_line != NULL && $office_direct_line != '') {
+							echo '<b>Office Direct Line: </b>' . $office_direct_line . '<br>';
+						}
+						
+						$home_landline = $this->escape($member_profile->home_landline);
+						if($home_landline != NULL && $home_landline != '') {
+							echo '<b>Home Landline: </b>' . $home_landline . '<br>';
+						}
+						
+						$mobile_phone = $this->escape($member_profile->mobile_phone);
+						if($mobile_phone != NULL && $mobile_phone != '') {
+							echo '<b>Mobile Phone: </b>' . $mobile_phone . '<br>';
+						}
+						
+						echo '<b>First Year EOY Finalist: </b>' . $this->escape($member_profile->first_year_eoy_finalist) . '<br>';
+						echo '<b>Nomination Company Name: </b>' . $this->escape($member_profile->nomination_company_name) . '<br>';
+						echo '<br>';
+						echo '<b>Current Company Name: </b>' . $this->escape($member_profile->current_company_name) . '<br>';						
+						echo '<b>Company Website: </b>' . $this->escape($member_profile->company_website) . '<br>';
+						echo '<b>Company Sector: </b>' . $this->escape($member_profile->sector) . '<br>';
+						
+					?>
+				</P>
+			</div>
+		</div>
+	<?php endforeach; ?>
+</div> <!-- End of div for displaying member profiles -->
+
+</body>

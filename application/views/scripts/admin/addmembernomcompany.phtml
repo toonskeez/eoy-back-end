@@ -1,0 +1,70 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/form-buttons.css');
+$this->title = "Add nomination company details";
+$this->headTitle($this->title);
+$this->member_service->populateFormAddMemNomCompany($this->form);
+?>
+
+<body class="span12">
+<div>
+
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+	<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<div class="row">
+
+<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+   	method="<?php echo $this->escape($this->form->getMethod()) ?>"
+	enctype="multipart/form-data">
+</div>
+
+<div class="row"><!-- Start of first row -->
+
+<div class="span4">
+	<fieldset>
+    	<legend>Nomination Company Info</legend>
+		<?= $this->form->company_type ?>
+		<fieldset class="existing-company"><!-- existing-company -->
+			<?= $this->form->company_sel ?>
+		</fieldset><!-- existing-company -->	
+		<fieldset class="new-company"><!-- new-company -->
+			<?= $this->form->nomination_company_name ?>
+		</fieldset><!-- new-company -->	
+		<fieldset class="existing-company"><!-- existing-company -->
+			<?= $this->form->company_names_view_sel ?>
+		</fieldset><!-- existing-company -->
+		<fieldset class="new-company"><!-- new-company -->
+			<?= $this->form->current_company_name ?>
+			<?= $this->form->company_website ?>
+			<?= $this->form->num_employees_sel ?>
+			<?= $this->form->sector_sel ?>
+			<?= $this->form->previous_company_names ?>
+			<?= $this->form->other_websites ?>
+		</fieldset><!-- new-company -->
+	</fieldset>
+</div>
+
+<div class="span2">
+	<fieldset>
+    	<legend>&nbsp;</legend>
+		<fieldset class="new-company"><!-- new-company -->
+			<?= $this->form->address_1 ?>
+			<?= $this->form->address_2 ?>
+			<?= $this->form->address_3 ?>
+			<?= $this->form->postcode ?>
+			<?= $this->form->county_sel ?>
+			<?= $this->form->country_sel ?>
+			<?= $this->form->contact_number ?>
+		</fieldset><!-- new-company -->
+	</fieldset>
+</div>
+
+</div><!-- End of first row -->
+<div class="row"><!-- start of second row -->
+	<span class="submit"><?= $this->form->submit ?></span><?= $this->form->cancel ?>
+</div><!-- end of second row -->
+</form>
+
+</div>
+</body>

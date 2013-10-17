@@ -1,0 +1,62 @@
+<?php
+$this->headLink()->prependStylesheet($this->baseUrl().'/css/edit.css');
+
+$m_id = $_GET['m_id']; // get member id
+
+Zend_Session::start();
+$member = new Zend_Session_Namespace('member');
+
+if(!isset($member->m_id)) {
+	$member->m_id = $m_id;
+} else {
+	if(isset($m_id) && $m_id != $member->m_id) {
+		$member->unsetAll();
+		$member->m_id = $m_id;
+	}
+}
+
+$member_profile = $this->member_tbl->getMemberProfile($member->m_id);
+$companies = $this->member_company_tbl->getMemberCompanies($member->m_id);
+$this->title = "Edit " . $member_profile['first_name'] . " " . $member_profile['last_name'] . "'s" . " Profile";
+$this->headTitle($this->title);
+
+?>
+
+<body class="span12">
+<div>
+
+<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+<a href="/public/admin/member">&nbsp;<b>Members</b></a>&nbsp;
+<a href="/public/admin/company">&nbsp;<b>Companies</b></a>
+
+<!-- ----------------------------------------------------------------- -->
+<div class="row">	
+	<div class="span12">
+		<br>
+		<ul id="menu">
+			<li><a href="editmemberpersonal?m_id=<?php echo $member->m_id ?>">Personal details</a></li>
+			<li><a href="editmemberprofessional?m_id=<?php echo $member->m_id ?>">Professional details</a></li>
+    		<li><a>Company details</a>
+        		<ul>
+            		<li><a href="memaddcompany?m_id=<?php echo $member->m_id ?>">Add Company</a></li>
+            		<li><a>Edit Company</a>
+            			<ul>
+            				<?php foreach($companies as $company) {
+            					$comp = $this->company_tbl->getCompany($company['company_id']);
+							 ?>
+            					<li><a href="memeditcompany?m_id=<?php echo $member->m_id ?>&c_id=<?php echo $comp['id'] ?>"><?php echo $comp['current_company_name'] ?></a></li>
+            				<?php } ?>
+            			</ul>
+            		</li>
+        		</ul>
+    		</li>
+    		<li><a href="editmembercontact?m_id=<?php echo $member->m_id ?>">Contact details</a></li>
+    		<li><a href="editmemberaltcontact?m_id=<?php echo $member->m_id ?>">Alternative Contact</a></li>
+    		<li><a href="editmembersocmedia?m_id=<?php echo $member->m_id ?>">Social Media</a></li>
+    		<li><a href="member"><i>Done</i></a></li>
+		</ul>
+	</div>
+</div>
+<!-- ----------------------------------------------------------------- -->
+</div>
+</body>

@@ -1,0 +1,66 @@
+<?php
+$this->title = "Companies";
+$this->headTitle($this->title);
+?>	
+
+<body class="span12">
+
+<div class="table-hover"> <!-- Start of div for displaying companies -->
+	<p>
+	<a href="/public/admin/index">&nbsp;<b>Home</b></a>&nbsp;
+	<a href="/public/admin/member">&nbsp;<b>Members</b></a>
+	</p>
+	<p>
+	<a href="/public/admin/addcompany">&nbsp;<b>Add Company</b></a>
+	</p>
+	<?php foreach($this->companies as $company) : ?>
+		<div class="row">
+			<?php echo '<hr style="border-width: 5px">'; ?>
+    		<div class="span3">
+				<p>
+					<a id="<?php echo $company->id ?>" href="/public/admin/editcompany?c_id=<?php echo $company->id ?>">&nbsp;<b>Edit this Company</b></a>
+				</p>
+			</div>
+   			<div class="span9">	
+   				<P>
+					<?php
+						echo '<b>Company Name: </b>' . $this->escape($company->current_company_name) . '<br>';
+						echo '<b>Company Website: </b>' . $this->escape($company->company_website) . '<br>';
+						echo '<b>Number of Employees: </b>' . $this->escape($company->num_employees_min)
+						. ' - ' . $this->escape($company->num_employees_max) . '<br>';
+						echo '<b>Sector: </b>' . $this->escape($company->sector) . '<br>';
+						echo '<b>Address: </b>' . $this->escape($company->address_1);
+						
+						$address_2 = $this->escape($company->address_2);
+						if($address_2 != NULL && $address_2 != '') {
+							echo ', ' . $address_2;
+						}
+						
+						$address_3 = $this->escape($company->address_3);
+						if($address_3 != NULL && $address_3 != '') {
+							echo ', ' . $address_3;
+						}
+						echo '<br>';
+						
+						$postcode = $this->escape($company->postcode);
+						if($postcode != NULL && $postcode != '') {
+							echo '<b>Postcode: </b>' . $postcode . '<br>';
+						}
+						
+						echo($company->county == NULL) ? '' : '<b>County: </b>' . $this->escape($company->county) . '<br>';
+
+						echo '<b>Country: </b>' . $this->escape($company->country) . '<br>';
+						
+						$contact_number = $this->escape($company->contact_number);
+						if($contact_number != NULL && $contact_number != '') {
+							echo '<b>Contact Number: </b>' . $contact_number . '<br>';
+						}
+						
+					?>
+				</P>
+			</div>
+		</div>
+	<?php endforeach; ?>
+</div> <!-- End of div for displaying companies -->
+
+</body>
